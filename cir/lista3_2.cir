@@ -1,0 +1,7 @@
+Função de Transferência, Lista 3, Exercício 2
+Vs 1 3 DC 12
+R1 1 2 3
+R2 2 3 6
+R3 2 0 7
+.TF V(3) Vs
+.END

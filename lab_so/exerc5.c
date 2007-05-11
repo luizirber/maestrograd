@@ -17,6 +17,7 @@ sem_t s_item,   /* quantidade de itens no buffer */
 int running = 1;
 int disponivel;
 
+/* thread produtor */
 void * produtor(void *thread_num) {
     int i;
     while(running) {
@@ -34,6 +35,8 @@ void * produtor(void *thread_num) {
         }
         else {
               for(i=0; i<strlen(input_string) && i<TAM_BUFFER; i++) {
+                  /* Escreve um char por vez no buffer, incrementando
+                   * itens e decrementando espaco. */
                   sem_getvalue(&s_item, &disponivel);
                   buffer[disponivel] = input_string[i];
                   sem_trywait(&s_espaco);
@@ -46,6 +49,7 @@ void * produtor(void *thread_num) {
     pthread_exit(NULL);
 }
 
+/* thread consumidor */
 void * consumidor(void* thread_num) {
     while(running) {
         int i;
@@ -53,6 +57,8 @@ void * consumidor(void* thread_num) {
         sem_wait(&s_mutex);
         sem_getvalue(&s_item, &disponivel);
         printf("\nconsumiu:");
+        /* imprime um char por vez, aumentando o espaco e
+         * decrementando o numero de itens no buffer */
         for (i=0; i<=disponivel; i++) {
             printf("%c", buffer[i]);
             sem_trywait(&s_item);

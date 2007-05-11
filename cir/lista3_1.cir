@@ -1,0 +1,9 @@
+Análise CC, Lista 3, Exercício 1
+Is  2 0 DC 2A
+R1  2 0 6
+R2  2 1 8
+R3  2 1 8
+Vab 1 0 DC 0V
+.DC Vab 0 0 1
+.PRINT DC I(Is) I(R1) I(R2) I(R3) I(Vab)
+.END

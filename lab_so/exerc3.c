@@ -6,7 +6,8 @@
 #include <malloc.h>
 #include <stdlib.h>
 
-int *shm_buffer;
+int *shm_buffer; /* buffer a ser compartilhado. Representa a matriz, cada
+                  * processo filho escrevera na linha que lhe for designada. */
 
 int main(int argc, char **argv) {
     int tam_linha, tam_coluna, *matriz1, *matriz2;
@@ -18,6 +19,9 @@ int main(int argc, char **argv) {
     printf("Entre com tamanho da linha e da coluna: ");
     scanf("%d %d", &tam_linha, &tam_coluna);
 
+    /* Um detalhe sobre a forma de acesso a memoria compartilhada:
+     * aloquei um buffer de int do tamanho da matriz, mas acesso ele como
+     * se fosse um vetor. Mais facil que usar [][], na minha opiniao. */
     if ((shmid=shmget(IPC_PRIVATE,sizeof(int)*tam_linha*tam_coluna,0700))>-1){
         shm_buffer = (int *)shmat(shmid, 0, 0);
         for (y=0; y<tam_coluna; y++)
@@ -59,6 +63,7 @@ int main(int argc, char **argv) {
         printf(" |\n");
     }
 
+    /* faz o fork e designa a linha correta para os filhos */
     y = 0;
     while ( y < tam_coluna ) {
         if ( (pid=fork()) > -1 ) {

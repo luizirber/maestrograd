@@ -1,0 +1,631 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="blog_arquivos/filelist.xml">
+<link rel=Edit-Time-Data href="blog_arquivos/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Estruturas de Dados </title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>FABIO LISBOA</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Roberto Ferrari Junior</o:LastAuthor>
+  <o:Revision>8</o:Revision>
+  <o:TotalTime>61</o:TotalTime>
+  <o:LastPrinted>2005-03-21T21:40:00Z</o:LastPrinted>
+  <o:Created>2005-03-08T15:49:00Z</o:Created>
+  <o:LastSaved>2005-03-28T20:19:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>636</o:Words>
+  <o:Characters>3437</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>28</o:Lines>
+  <o:Paragraphs>8</o:Paragraphs>
+  <o:CharactersWithSpaces>4065</o:CharactersWithSpaces>
+  <o:Version>10.2625</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:Zoom>BestFit</w:Zoom>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:HyphenationZone>21</w:HyphenationZone>
+  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
+  <w:DisplayVerticalDrawingGridEvery>0</w:DisplayVerticalDrawingGridEvery>
+  <w:UseMarginsForDrawingGridOrigin/>
+  <w:Compatibility>
+   <w:UsePrinterMetrics/>
+   <w:WW6BorderRules/>
+   <w:FootnoteLayoutLikeWW8/>
+   <w:ShapeLayoutLikeWW8/>
+   <w:AlignTablesRowByRow/>
+   <w:ForgetLastTabAlignment/>
+   <w:LayoutRawTableWidth/>
+   <w:LayoutTableRowsApart/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;
+	mso-ansi-language:EN-US;}
+h1
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:8.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";
+	color:windowtext;
+	mso-font-kerning:0pt;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+h2
+	{mso-style-next:Normal;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";
+	color:windowtext;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+h3
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:Arial;
+	color:windowtext;
+	mso-ansi-language:EN-US;
+	font-weight:bold;}
+h4
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	color:windowtext;
+	mso-ansi-language:EN-US;
+	font-weight:bold;}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 216.0pt right 432.0pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;
+	mso-ansi-language:EN-US;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 216.0pt right 432.0pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;
+	mso-ansi-language:EN-US;}
+p.MsoBodyText2, li.MsoBodyText2, div.MsoBodyText2
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.MsoBodyText3, li.MsoBodyText3, div.MsoBodyText3
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:20.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:black;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:21.0cm 842.0pt;
+	margin:2.0cm 2.0cm 73.7pt 2.0cm;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Tabela normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+table.MsoTableGrid
+	{mso-style-name:"Tabela com grade";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	border:solid windowtext 1.0pt;
+	mso-border-alt:solid windowtext .5pt;
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-border-insideh:.5pt solid windowtext;
+	mso-border-insidev:.5pt solid windowtext;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="6146">
+  <o:colormenu v:ext="edit" strokecolor="none"/>
+ </o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=PT-BR link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'>Estruturas de
+Dados - BLOG<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:Arial;mso-ansi-language:
+PT-BR'>1º semestre <span class=GramE>de 2005 </span><o:p></o:p></span></p>
+
+<p class=MsoHeader style='tab-stops:36.0pt center 216.0pt right 432.0pt'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'>02.520-<span
+class=GramE>8 Turma B</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:Arial;mso-ansi-language:
+PT-BR'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:Arial;mso-ansi-language:
+PT-BR'><o:p>&nbsp;</o:p></span></p>
+
+<h1 style='mso-pagination:none;page-break-after:auto'><span style='mso-bidi-font-size:
+8.0pt;mso-bidi-font-family:Arial'>Trabalhos do Curso<o:p></o:p></span></h1>
+
+<p class=MsoNormal align=right style='text-align:right'><!--[if gte vml 1]><v:line
+ id="_x0000_s1026" style='position:absolute;left:0;text-align:left;flip:x;
+ z-index:1' from="-10.45pt,2.25pt" to="454.45pt,2.3pt" o:allowincell="f"
+ strokeweight="2pt">
+ <v:stroke startarrowwidth="wide" startarrowlength="long" endarrowwidth="wide"
+  endarrowlength="long"/>
+</v:line><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+relative;z-index:1;left:-16px;top:1px;width:624px;height:5px'><img width=624
+height=4 src="blog_arquivos/image001.gif" v:shapes="_x0000_s1026"></span><![endif]><span
+lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<h3><span lang=EN-US style='font-size:8.0pt'>Trabalho 2: Armazenamento temporário
+de ligações 0800 em espera. Individual. <o:p></o:p></span></h3>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>Uma central de atendimento a clientes
+tem vários atendentes, mas um número muito maior de linhas telefônicas
+recebendo chamadas. As chamadas são colocadas em espera segundo a ordem de
+chegada, e atendidas quando possível. Ocorre que algumas destas chamadas vêm de
+longe e, neste caso, se elas ficam esperando na linha, causam uma despesa muito
+maior do que as chamadas que vem de perto. Uma solução alternativa seria
+colocar as chamadas em fila segundo a prioridade definida primeiramente pelo
+custo (as mais caras devem esperar menos) e secundariamente por ordem de
+chamada. Projete uma estrutura para modelar essa situação alternativa. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>- Projete a estrutura - defina
+funcionalidade;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>- Projete a estrutura – faça um
+diagrama e explique resumidamente o funcionamento;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>- Implemente.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>Sobre as estruturas a serem
+escolhidas:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>- Deve atender ao solicitado no texto
+acima;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>- Deve ser encadeada;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>- Deve ser (em algum ponto) diferente
+das estruturas vistas em aula.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>Implemente uma aplicação para simular
+a solução do problema em questão. Você poderá escolher o nível de sofisticação
+da aplicação. O importante é que resolva o problema proposto utilizando um Tipo
+Abstrato de Dados para armazenamento temporário das ligações em espera.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<h4><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>Para todos os
+trabalhos<o:p></o:p></span></h4>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>Implemente (em
+C, C++ ou Pascal e derivados). Entregue listagem dos programas, um print screen
+da execução, e uma breve documentação (descrição de cada objeto, desenho das
+estruturas, etc.). <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><b style='mso-bidi-font-weight:normal'><span lang=EN-US style='font-size:
+8.0pt;font-family:Arial'>Possíveis Problemas</span></b><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>1- trabalho
+incompleto ou diferente do especificado; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>2- erro nos
+algoritmos; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>3-<span
+style='mso-spacerun:yes'>  </span>execução inexistente ou insuficiente; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>4- não usar
+arquivos separados para módulos independentes; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>5- não
+respeitar as características fundamentais de TADs/Objetos; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>6-
+incluir<span style='mso-spacerun:yes'>  </span>em TADs<span
+style='mso-spacerun:yes'>  </span>ou objetos tarefas que não lhe dizem
+respeito; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>7- não
+entregar no prazo<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>9- trabalhos
+muito iguais<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>10- não
+entregar especificação dos objetos<o:p></o:p></span></p>
+
+<h3><span lang=EN-US style='font-size:8.0pt'><o:p>&nbsp;</o:p></span></h3>
+
+<h3><span lang=EN-US style='font-size:8.0pt'><o:p>&nbsp;</o:p></span></h3>
+
+<h3><span lang=EN-US style='font-size:8.0pt'><o:p>&nbsp;</o:p></span></h3>
+
+<h3><span lang=EN-US style='font-size:8.0pt'>Trabalho 1: Aplicação Livre Usando
+Filas. Individual. <o:p></o:p></span></h3>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>Implemente uma aplicação que utilize
+filas. Você poderá escolher a aplicação, e seu nível de sofisticação. A
+aplicação pode ser simples. O importante é que exemplifique bem o uso de filas.
+Preferencialmente que utilize mais que uma (instância do TAD/objeto) fila.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>Faça duas implementações do mesmo
+TAD/objeto fila: (1) uma implementação com alocação seqüencial e estática; e
+(2) uma implementação com alocação encadeada e dinâmica. As implementações
+precisam ser diferentes do visto em aula. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'>O programa principal deverá usar
+apenas uma das 2 implementações da fila: teste uma vez com uma, depois compile
+novamente para testar com a outra, SEM ALTERAR QUALQUER COMANDO NO PROGRAMA
+PRINCIPAL (exceto o nome do arquivo do TAD/objeto fila, caso isso seja
+conveniente). A fila deve implementar a fila e... só a fila mesmo.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify'><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><!--[if gte vml 1]><v:group id="_x0000_s1073" style='position:absolute;
+ margin-left:19.25pt;margin-top:4.2pt;width:1in;height:90pt;z-index:2'
+ coordorigin="9416,4324" coordsize="1440,1800">
+ <v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202" path="m,l,21600r21600,l21600,xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s1065" type="#_x0000_t202" style='position:absolute;
+  left:9416;top:4324;width:1440;height:468'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='font-size:12.0pt;font-family:Arial;mso-ansi-language:PT-BR'>Aplicação<o:p></o:p></span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:shape><v:shape id="_x0000_s1066" type="#_x0000_t202" style='position:absolute;
+  left:9621;top:5536;width:1080;height:588'>
+  <v:textbox>
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     class=GramE><span style='font-size:12.0pt;font-family:Arial;mso-ansi-language:
+     PT-BR'>Fila </span></span><span style='font-size:12.0pt;font-family:Arial;
+     mso-ansi-language:PT-BR'><o:p></o:p></span></p>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='font-size:12.0pt;font-family:Arial;mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:shape><v:line id="_x0000_s1072" style='position:absolute' from="10136,4796"
+  to="10136,5516">
+  <v:stroke endarrow="block"/>
+ </v:line></v:group><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+
+<table cellpadding=0 cellspacing=0 align=left>
+ <tr>
+  <td width=25 height=5></td>
+ </tr>
+ <tr>
+  <td></td>
+  <td><img width=102 height=126 src="blog_arquivos/image003.gif" v:shapes="_x0000_s1073 _x0000_s1065 _x0000_s1066 _x0000_s1072"></td>
+ </tr>
+</table>
+
+</span><![endif]><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<h4><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>Para todos os
+trabalhos<o:p></o:p></span></h4>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>Implemente (em
+C, C++ ou Pascal e derivados). Entregue listagem dos programas, um print screen
+da execução, e uma breve documentação (descrição de cada objeto, desenho das
+estruturas, etc.). <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><b style='mso-bidi-font-weight:normal'><span lang=EN-US style='font-size:
+8.0pt;font-family:Arial'>Possíveis Problemas</span></b><span lang=EN-US
+style='font-size:8.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>1- trabalho
+incompleto ou diferente do especificado; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>2- erro nos
+algoritmos; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>3-<span
+style='mso-spacerun:yes'>  </span>execução inexistente ou insuficiente; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>4- não usar
+arquivos separados para módulos independentes; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>5- não
+respeitar as características fundamentais de TADs/Objetos; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>6-
+incluir<span style='mso-spacerun:yes'>  </span>em TADs<span
+style='mso-spacerun:yes'>  </span>ou objetos tarefas que não lhe dizem
+respeito; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>7- não
+entregar no prazo<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>9- trabalhos
+muito iguais<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:6.0pt;text-align:justify;mso-pagination:
+none'><span lang=EN-US style='font-size:8.0pt;font-family:Arial'>10- não
+entregar especificação dos objetos<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:Arial;mso-ansi-language:
+PT-BR'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:8.0pt;font-family:Arial;mso-ansi-language:PT-BR'>Monitoria<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:Arial;mso-ansi-language:
+PT-BR'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:Arial;mso-ansi-language:
+PT-BR'>Monitor: Rodrigo <span class=SpellE>Tofoli</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:Arial;mso-ansi-language:
+PT-BR'>Horários: Segundas 8-10; 18-21; Terças 12-14; Quartas 12-14; Quintas
+12-14; 18-<span class=GramE>21</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:Arial;mso-ansi-language:
+PT-BR'>Local: LIG ou <span class=SpellE><span class=GramE>CatiJr</span></span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt;font-family:Arial;mso-ansi-language:
+PT-BR'>e-mail: <a href="mailto:rbtofoli@yahoo.com.br">rbtofoli@yahoo.com.br</a>
+<o:p></o:p></span></p>
+
+<p align=center style='margin-left:14.15pt;text-align:center'><span
+style='font-size:8.0pt;font-family:Arial'><a
+href="http://www.dc.ufscar.br/~ferrari/ed/ed.html">Estruturas de Dados</a><o:p></o:p></span></p>
+
+<p align=center style='text-align:center'><span style='font-size:8.0pt;
+font-family:Arial'><span style='mso-spacerun:yes'>        </span><a
+href="http://www.dc.ufscar.br/~ferrari">escritório virtual:
+www.dc.ufscar.br/~ferrari/&nbsp;</a>&nbsp;<span style='mso-spacerun:yes'>   
+</span>&nbsp;&nbsp;<a href="mailto:ferrari@dc.ufscar.br">e-mail:
+ferrari@dc.ufscar.br</a><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

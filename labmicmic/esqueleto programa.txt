@@ -1,0 +1,85 @@
+#include <mcs51/at89x52.h>
+
+/****************************************
+Links de auxílio para a implementação:
+3.8.2 MCS51/DS390 Interrupt Service Routines
+http://sdcc.sourceforge.net/doc/sdccman.html/node66.html
+3.9.3 Semaphore locking (mcs51/ds390)
+http://sdcc.sourceforge.net/doc/sdccman.html/node72.html
+3.12 Inline Assembler Code [para a inclusão do código do I²C]
+http://sdcc.sourceforge.net/doc/sdccman.html/node78.html
+
+Três estados:
+Estado Normal:                    // pela descricao, vai ser nossa main()
+    Faz verificação dos equipamentos conectados às portas livres.
+
+Estado Problema:                   // subrotina
+Após verificar se existem equipamentos com problemas, faz ligação          
+    Ligação: Humano: Avisa qual equipamento está com problema
+                Placa: Gera sequencia de DTMF para tomar alguma ação, ligar ou desligar outro equipamento
+
+Estado Recebendo:                  // interrupcao
+    Uma interrupção. quando o telefone estiver tocando, seta o bit que dispara a interrupção.
+    a interrupção deve atender o telefone, enviando outro bit.
+    Após atender a ligação, reconhece a senha, identifica equipamento, liga, desliga ou da estado do equipamento.
+
+    PSEUDO_CODIGO:
+
+       struct {
+                     estado: bit,
+                     porta: //verificar tipo de dado
+                  } maquina;
+
+       void cria_estados() __critical {
+           //cria vetor com posicoes do tipo maquina
+       }
+
+       int estado_problema(int[])  __critical {
+          //tratamento de erro do estado problema
+            DTMF.IniciaLinha();
+            sleep()->??
+            DTMF.GeraDTMF(Telefone);
+            while (DTMF.Verifica_estado_linha() != antendido || tempo ??) {}
+            
+            //linha atendida
+            geradtmf(Equipamento e estado);
+       }
+
+        int main(void) {
+             cria_estados() 
+             while (1) {
+                for (x, x<TAMANHO_VETOR, x++) {
+                     if ( vetor[x].estado != vetor[x].porta ) {
+                           //adiciona em vetor_problema    
+                 }
+                 if vetor_problema != VAZIO {
+                     resultado = estado_problema(vetor_problema)
+                     //trata resutado
+                 }
+                // fazer tratamento para evitar que fique discando sempre que tiver problema (intervalos de 30 minutos?)
+            }
+
+        }
+
+        void Recebendo_ligadacao(void) interrupt 3{
+                char[30] = DTMF.Decodifica();                     
+                if (char[0] != *)
+                   DTMF.Desliga()
+               else
+                   //Comparar != sernha
+                   else
+                      //Pega equipamento
+                      //Retorna estado ou liga ou desliga
+                      //GO-TO iuahiauhaia
+                        
+       }
+
+Biblioteca DTMF:
+- Verifica Estado da linha: Verifica se a linha está, desligada, ocupada, tocando, ???
+- Inicia Linha Telefonica:
+- Gera DTMF(int[])
+- Desligar Linha Telefonica:
+
+- Decodifica DTMF(Decodifica 1 DTMF, Decofica toda a sequencia)
+
+****************************************/

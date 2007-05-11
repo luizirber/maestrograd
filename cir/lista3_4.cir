@@ -1,0 +1,8 @@
+Análise CC, Lista 3, Exercício 3
+L1 0 2 10mH IC=90mA
+R1 2 1 20
+C1 1 3 2uF IC=-10V
+Vs 0 3 DC 21V
+.TRAN 20u 5000u UIC
+.PROBE
+.END

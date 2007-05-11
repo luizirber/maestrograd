@@ -1,0 +1,44 @@
+
+**** 05/16/106 23:04:59 ****** NT PSpice 8.0 (July 1997) ****** ID# 305419896 
+
+ Anlise CC, Lista 3, Exerccio 1
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+Is  2 0 DC 2A
+R1  2 0 6
+R2  2 1 8
+R3  2 1 8
+Vab 1 0 DC 0V
+.DC Vab 0 0 1
+.PRINT DC I(Is) I(R1) I(R2) I(R3) I(Vab)
+
+**** 05/16/106 23:04:59 ****** NT PSpice 8.0 (July 1997) ****** ID# 305419896 
+
+ Anlise CC, Lista 3, Exerccio 1
+
+
+ ****     DC TRANSFER CURVES               TEMPERATURE =   27.000 DEG C
+
+
+******************************************************************************
+
+
+
+  Vab         I(Is)       I(R1)       I(R2)       I(R3)       I(Vab)      
+
+   0.000E+00   2.000E+00  -8.000E-01  -6.000E-01  -6.000E-01  -1.200E+00
+
+
+
+
+          JOB CONCLUDED
+
+          TOTAL JOB TIME             .01
+

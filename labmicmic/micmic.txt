@@ -1,0 +1,19 @@
+Cronograma para a disciplina Laboratório de Microcontroladores e Microprocessadores
+30/08 - Apresentação e discussão do cronograma
+06/09 - Estudo teórico do protocolo
+13/09 - Apresentação do resumo do estudo e estudo do design do circuito
+20/09 - Montagem do circuito
+27/09 - Teste de E/S do circuito
+04/10 - Montagem do algoritmo para E/S*
+11/10 - Programação em ASSEMBLY ou C (1/2)
+18/10 - Programação em ASSEMBLY ou C (2/2) e teste de implementação
+25/10 - Apresentação de E/S e montagem do algoritmo para Processamento de Dados**
+01/11 - Programação em ASSEMBLY ou C (1/2)
+08/11 - Programação em ASSEMBLY ou C (2/2) e teste de implementação
+22/11 - Apresentação de Processamento de Dados e montagem do algoritmo conjunto
+29/11 - Apresentação final
+06/12 - LIVRE
+13/12 - LIVRE
+
+*   Algoritmo de sistema de 'senha'
+**  Algoritmo de processamento de dados de um sistema similar ao SMS

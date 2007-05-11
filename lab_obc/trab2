@@ -1,0 +1,6 @@
+2° Trabalho:
+Implemente no kit 8088 um timer programável, no qual deve-se informar as seguintes unidades de tempo (HH:MM:SS) - não é necessário que decremento corresponda a um cronômetro real. Quando o contador zerar, o pino PC3 (porta C) deve passar de 0 (zero) para um.
+OBS: 	1) O timer quando ligado deve apresentar a mensagem "TIMER UFSCAE 2006"
+     	2) Após um pequeno intervalo de tempo a mensagem acima é apagada e um prompt ">" aparece e aguarda que o padrão HH:MM:SS seja digitado.
+	3) O botão "*" quando acionado inicia/pára o decremento
+	4) O botão "#" permite redefinir um novo período de tempo (somente quando o timer estiver parado ou zerado).

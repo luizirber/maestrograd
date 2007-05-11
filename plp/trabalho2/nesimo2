@@ -1,0 +1,15 @@
+(defun n-esimo! (n lista)
+  (if (= n 0)
+    (car lista)
+    (n-esimo! (1- n) (rest lista)))
+  )
+
+---------------------------------------
+
+(defun n-esimo (n lista)
+  ((lambda (temp) 
+    (do ((i 0 (1+ i)))
+        ((= i n) (car temp))
+        (setq temp (cdr temp)))
+   ) lista)
+)

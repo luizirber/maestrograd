@@ -1,0 +1,268 @@
+       CODE SEGMENT
+            ASSUME CS:CODE,DS:CODE
+            ORG 100H
+    COMECO: JMP INICIA       ;*******VERIFICAR A SINTAXE*******
+
+  UMSEGUNDO PROC NEAR        ;PROCEDIMENTO QUE GASTA CERCA DE 85 CENTÉSIMOS DE SEGUNDO
+            PUSH CX
+            MOV  CX, 47BCH
+    enrola: LOOP enrola
+            POP  CX
+            RET
+  UMSEGUNDO ENDP
+
+   LIGADISP PROC NEAR
+            PUSH DX
+            MOV  DX, 4002H   ;Endereço de entrada de dados pela porta C
+            MOV  AL, BL      ;*******VERIFICAR QUAL É O BENTIDO VALOR DE BL*******
+            OR   AL, 04H     ;*******VERIFICAR PORQUE ELE FEZ ISSO*******
+            OUT  DX, AL
+            NOP
+            NOP
+            NOP
+            NOP
+            MOV  AL, BL
+            OUT  DX, AL
+            POP  DX
+            RET
+   LIGADISP ENDP
+
+     LEIA05 PROC NEAR        ;FAZ A LEITURA DAS TECLAS 0 A 5 E MODIFICA AX
+     LE_05: CALL LEIATECLADO ;Chama a rotina de leitura de teclado
+            CMP  AL, 22H     ;Verifica se a linha lida é a das teclas 7 a 9
+            JE   LE_05       ;Se for efetua novamente a leitura
+            CMP  AL, 88H     ;Verifica se a linha lida é a das teclas 1 a 3
+            JNE  CHECAOUTRO
+            JMP  OK_05       ;Caso a tecla lida seja de 1 a 3, já efetua a conversão
+CHECAOUTRO: CMP  AL, 11H     ;Verifica se a linha lida é a da tecla zero
+            JE   CHECA_Z
+            JMP  CHECA_6
+   CHECA_Z: CMP  AH, D0H     ;Caso seja a linha da tecla 0, verifica se o caractere lido é zero
+            JE   OK_0_05
+            JMP  LE_09       ;Caso não seja lido o zero para aquela linha, efetua a leitura novamente
+   OK_0_05: JMP  OK_05
+   CHECA_6: CMP  AH, B0H     ;Verifica se a tecla digitada é 6
+            JNE  OK_05
+            JMP  LE_05       ;Caso a tecla digitada seja 6, a leitura é efetuada novamente
+     OK_05: CALL CONVERTE_N  ;Converte o valor lido para o caracter hexadecimal equivalente
+            RET
+     LEIA05 ENDP
+
+     LEIA09 PROC NEAR        ;FAZ A LEITURA DAS TECLAS 0 A 9 E MODIFICA AX
+     LE_09: CALL LEIATECLADO ;Chama a rotina de leitura de teclado
+            CMP  AL, 11H     ;Verifica se a linha lida é a da tecla zero
+            JE   CHECA_Z
+            JMP  OK_09
+   CHECA_Z: CMP  AH, D0H     ;Caso seja, verifica se o caractere lido é zero
+            JE   OK_09
+            JMP  LE_09       ;Caso não seja lido o zero para aquela linha, efetua a leitura novamente
+     OK_09: CALL CONVERTE_N  ;Converte o valor lido para o caracter hexadecimal equivalente
+            RET
+     LEIA09 ENDP
+
+LEIATECLADO PROC NEAR        ;FAZ A LEITURA DE TODAS AS TECLAS E NÃO FAZ VERIFICAÇÃO, MODIFICA AX
+            PUSH DX          ;Salva DX
+            MOV  AL, 11H     ;Valor para facilitar o comando de ROL
+            MOV  AH, 00H
+            PUSH AX          ;Armazena o valor de AX=0011H
+MUDA_LINHA: POP  AX          ;Recupera o valor de AX
+            MOV  DX, 4000H   ;Endereço de saída da porta A
+            OUT  DX, AL      ;Envia AL à porta A
+            PUSH AX          ;Armazena o valor de AX para o controle das rotações
+            MOV  DX, 4002H   ;Endereço de entrada da porta C
+            IN   AL, DX      ;Recebe o valor hexadecimal fornecido pela porta C
+            AND  AL, F0H     ;Filtra para verificar só o nibble superior de AL
+            CMP  AL, F0H     ;Verifica se algum botão foi apertado
+            JE   NAO_LIDO
+            JMP  FINALIZALE
+  NAO_LIDO: POP  AX
+            ROL  AL, 1       ;Rotaciona os bits de AL para a esquerda no passo de 1 bit
+            PUSH AX
+            JMP  MUDA_LINHA  ;Verifica novamente se alguma tecla foi lida para uma nova linha
+FINALIZALE: MOV  DL, AL      ;DL armazena temporariamente o valor lido pela porta C, já filtrado
+            POP  AX
+            MOV  AH, DL      ;AH armazena o valor lido pela porta C, já filtrado
+            POP  DX          ;Recupera DX
+            RET
+LEIATECLADO ENDP
+
+  SUSTENIDO PROC NEAR        ;FAZ A LEITURA DA TECLA #, MODIFICA CL
+            PUSH DX          ;Salva DX
+            PUSH AX          ;Salva AX
+            MOV  CX, 0000H
+            MOV  AL, 11H
+            MOV  AH, 00H
+            MOV  DX, 4000H
+            OUT  DX, AL
+            MOV  DX, 4002H
+            IN   AL, DX
+            AND  AL, F0H     ;Filtra para verificar só o nibble superior de AL
+            CMP  AL, B0H     ;Verifica se a tecla # foi apertada
+            JE   SUS
+            JMP  FIM_SUS
+       SUS: MOV  CL, 01H
+   FIM_SUS: POP  AX          ;Recupera AX
+            POP  DX          ;Recupera DX
+            RET
+  SUSTENIDO ENDP
+
+  ASTERISCO PROC NEAR        ;FAZ A LEITURA DA TECLA #, MODIFICA CH
+            PUSH DX          ;Salva DX
+            PUSH AX          ;Salva AX
+            MOV  AL, 11H
+            MOV  AH, 00H
+            MOV  DX, 4000H
+            OUT  DX, AL
+            MOV  DX, 4002H
+            IN   AL, DX
+            AND  AL, F0H     ;Filtra para verificar só o nibble superior de AL
+            CMP  AL, E0H     ;Verifica se a tecla * foi apertada
+            JE   AST
+            JMP  FIM_AST
+       AST: MOV  CH, 01H
+   FIM_AST: POP  AX          ;Recupera AX
+            POP  DX          ;Recupera DX
+            RET
+  ASTERISCO ENDP
+
+  LEIATIMER PROC NEAR        ;FAZ A LEITURA DO TEMPO DO TIMER E SALVA HORAS, MINUTOS E SEGUNDOS EM BH, BL E CH
+            ;*******FAZER A PROGRAMAÇÃO DIREITO AQUI*******
+            CALL LEIA09
+            CALL IMPRIME_N
+            MOV  BH, AL
+            CALL LEIA09
+            CALL IMPRIME_N
+            MOV  AH, BH
+            CALL CONVERTE_NN
+            MOV  BH, AL
+            ;*******FAZER A PROGRAMAÇÃO DIREITO AQUI*******
+            CALL LEIA05
+            CALL IMPRIME_N
+            MOV  BL, AL
+            CALL LEIA09
+            CALL IMPRIME_N
+            MOV  AH, BL
+            CALL CONVERTE_NN
+            MOV  BL, AL
+            ;*******FAZER A PROGRAMAÇÃO DIREITO AQUI*******
+            CALL LEIA05
+            CALL IMPRIME_N
+            MOV  CH, AL
+            CALL LEIA09
+            CALL IMPRIME_N
+            MOV  AH, CH
+            CALL CONVERTE_NN
+            MOV  CH, AL
+            ;*******FAZER A PROGRAMAÇÃO DIREITO AQUI*******
+            RET
+  LEIATIMER ENDP
+
+  IMPRIME_T PROC NEAR
+            RET
+  IMPRIME_T ENDP
+
+ CONVERTE_N PROC NEAR        ;PROCEDIMENTO QUE CONVERTE AS TECLAS NUMÉRICAS EM CÓDIGO HEXADECIMAL
+            AND  AL, 0FH     ;AH entra com o valor lido do PC
+            AND  AH, F0H     ;AL entra com o valor enviado a PA
+            CMP  AL, 01H     ;Caso AL seja 01, o caractere lido é 0
+            JE   ZENO_N
+            JMP  NUMERO
+    ZERO_N: MOV  AH, 30H     ;Caractere 0
+            JMP  FIM_CONV
+    NUMERO: CMP  AL, 02H     ;Caso AL seja 02, verifica se o caractere lido é 7, 8 ou 9
+            JE   SETE_A9
+            JMP  UM_A6
+   SETE_A9: CMP  AH, E0H
+            JE   SETE_N
+            JMP  OITO_NOVE
+    SETE_N: MOV  AH, 37H     ;Caractere 7
+            JMP  FIM_CONV
+ OITO_NOVE: CMP  AH, D0H
+            JE   OITO_N
+            JMP  NOVE_N
+    OITO_N: MOV  AH, 38H     ;Caractere 8
+            JMP  FIM_CONV
+    NOVE_N: MOV  AH, 39H     ;Caractere 9
+            JMP  FIM_CONV
+     UM_A6: CMP  AL, 04H     ;Caso AL seja 04, verifica se o caractere lido é 4, 5 ou 6
+            JE   QUATRO_A6
+            JMP  UM_A3
+ QUATRO_A6: CMP  AH, E0H
+            JE   QUATRO_N
+            JMP  CINCO_SEIS
+  QUATRO_N: MOV  AH, 34H     ;Caractere 4
+            JMP  FIM_CONV
+CINCO_SEIS: CMP  AH,D0H
+            JE   CINCO_N
+            JMP  SEIS_N
+   CINCO_N: MOV  AH, 35H     ;Caractere 5
+            JMP  FIM_CONV
+    SEIS_N: MOV  AH, 36H     ;Caractere 6
+            JMP  FIM_CONV
+     UM_A3: CMP  AH, E0H     ;Como AL é 08, verifica se o caractere lido é 1, 2 ou 3
+            JE   UM_N
+            JMP  DOIS_TRES
+      UM_N: MOV  AH, 31H     ;Caractere 1
+            JMP  FIM_CONV
+ DOIS_TRES: CMP  AH, D0H
+            JE   DOIS_N
+            JMP  TRES_N
+    DOIS_N: MOV  AH, 32H     ;Caractere 2
+            JMP  FIM_CONV
+    TRES_N: MOV  AH, 33H     ;Caractere 3
+            JMP  FIM_CONV
+  FIM_CONV: MOV  AL, 0H
+            RET              ;Retorna o valor já em hexadecimal do caractere em AH
+ CONVERTE_N ENDP
+
+CONVERTE_NN PROC NEAR        ;CONVERTE OS CARACTERES ASCII LOCALIZADOS EM AH E AL PARA UM NÚMERO HEXADECIMAL EM AL
+            PUSH DX          ;Salva DX
+            PUSH BX          ;Salva BX
+            MOV  BL, 0AH     ;BL recebe 10
+            SUB  AH, 30H     ;AH é convertido para o seu valor hexadecimal
+            SUB  AL, 30H     ;AL é convertido para o seu valor hexadecimal
+
+            MOV  BH, AL      ;A unidade é armazenada temporariamente em BH
+            MUL  BL          ;AL recebe o valor da dezena multiplicado por 10
+            ADD  AL, BH      ;O número já transformado em hexadecimal fica armazenado em AL
+            POP  BX          ;Recupera BX
+            POP  DX          ;Recupera DX
+            RET
+CONVERTE_NN ENDP
+            
+
+  IMPRIME_N PROC NEAR        ;IMPRIME O NÚMERO CUJO CARACTERE ASCII ESTEJA EM AL
+            PUSH DX          ;Salva DX
+            MOV  DX, 4001H   ;Endereço de saída de dados pela porta B
+            OUT  DX, AL
+            POP  DX          ;Recupera DX
+            RET
+  IMPRIME_N ENDP
+
+ IMPRIME_NN PROC NEAR        ;IMPRIME O NÚMERO CUJO NÚMERO HEXADECIMAL ESTEJA EM AL
+            PUSH DX          ;Salva DX
+            PUSH BX          ;Salva BX
+            PUSH AX          ;Salva AX
+            MOV  BL, 0AH     ;BL recebe 10
+            MOV  AH, 00H     ;AX recebe AL
+            DIV  BL          ;Efetua a divisão do número contido em AL por 10
+            ADD  AH, 30H     ;O resto da divisão é convertido para um caractere ASCII
+            ADD  AL, 30H     ;O quociente da divisão é convertido para um caractere ASCII
+            MOV  DX, 4001H   ;Endereço de saída de dados pela porta B
+            OUT  DX, AL      ;A dezena é exibida no display
+            OUT  DX, AH      ;A unidade é exibida no display
+            POP  AX          ;Recupera AX
+            POP  BX          ;Recupera BX
+            POP  DX          ;Recupera DX
+            RET
+ IMPRIME_NN ENDP
+
+     PARADO PROC NEAR
+            RET
+     PARADO ENDP
+
+
+            ORG  1FF0H
+            JMP  COMECO
+       CODE ENDS
+            END  COMECO

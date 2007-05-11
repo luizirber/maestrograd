@@ -1,0 +1,25 @@
+
+**** 05/16/106 09:54:05 ****** NT PSpice 8.0 (July 1997) ****** ID# 305419896 
+
+ Anlise CC, Lista 3, Exerccio 3
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+L1 0 2 10mH IC=90mA
+R1 2 1 20
+C1 1 3 2uF IC=-10V
+Vs 0 3 DC 21V
+.TRAN 20u 5000u UIC
+.PROBE
+
+
+          JOB CONCLUDED
+
+          TOTAL JOB TIME            0.00
+

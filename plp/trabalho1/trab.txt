@@ -1,0 +1,18 @@
+desparentize(Lista, ListaSimples) :-
+	desparentize(Lista, [], ListaSimples0),
+        !,
+	ListaSimples = ListaSimples0.
+
+desparentize(Elem, CaudaRes, [Elem|CaudaRes]) :- % condições inseridas 
+        var(Elem), !.                            % para evitar que
+                                                 % listas vazias
+desparentize([], CaudaRes, CaudaRes) :- !.       % apareçam na saida
+
+desparentize([Cabeca|CaudaRes], Cauda, Lista) :-
+	desparentize(Cabeca, CabecaCaudaDesparentizada, Lista), 
+	desparentize(CaudaRes, Cauda, CabecaCaudaDesparentizada).
+
+desparentize(Atomo, CaudaRes, [Atomo|CaudaRes]).
+
+/**************************************
+
