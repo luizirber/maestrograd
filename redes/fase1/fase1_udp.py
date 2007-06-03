@@ -4,7 +4,7 @@ import sys
 
 class conexao(object):
     def __init__(self):
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.conn_pool = {}
         self.counter = 0
         self.mode = 'server'
