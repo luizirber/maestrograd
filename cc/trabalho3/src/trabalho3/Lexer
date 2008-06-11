@@ -1,0 +1,22 @@
+package trabalho3;
+
+import java_cup.runtime.Symbol;
+%%
+%cup
+%public
+%class Lexer
+%%
+
+"[" { return new Symbol(sym.ABRECOLCHETE); }
+"]" { return new Symbol(sym.FECHACOLCHETE); }
+"=" { return new Symbol(sym.ATRIBUICAO); }
+"P" { return new Symbol(sym.IMPRIMIR); }
+"R" { return new Symbol(sym.LER); }
+"N" { return new Symbol(sym.INCREMENTAR); }
+"D" { return new Symbol(sym.DECREMENTAR); }
+"I" { return new Symbol(sym.SE); }
+"W" { return new Symbol(sym.ENQUANTO); }
+[0-9] { return new Symbol(sym.NUMERO, new Character(yytext().charAt(0))); }
+[A-Za-z] { return new Symbol(sym.LETRA, new Character(yytext().charAt(0))); }
+[ \t\r\n\f] { /* ignore white space. */ }
+. { System.err.println("Illegal character: "+yytext()); }

@@ -1,0 +1,144 @@
+package trabalho3;
+
+import java_cup.runtime.*;
+import java.util.*;
+import AST.*;
+
+terminal ABRECOLCHETE, FECHACOLCHETE, ATRIBUICAO, IMPRIMIR, LER, INCREMENTAR,
+         DECREMENTAR, SE, ENQUANTO;
+terminal Character NUMERO, LETRA;
+
+non terminal Program           PROGRAMA;
+non terminal Command           COMANDO;
+non terminal AssignCommand     COMANDO_ATRIBUI;
+non terminal ReadCommand       COMANDO_LE;
+non terminal IncCommand        COMANDO_INCREMENTA;
+non terminal DecCommand        COMANDO_DECREMENTA;
+non terminal PrintCommand      COMANDO_IMPRIME;
+non terminal IfCommand         COMANDO_SE;
+non terminal WhileCommand      COMANDO_ENQUANTO;
+non terminal CompositeCommand  COMANDO_COMPOSTO;
+non terminal Value             VALOR;
+non terminal Vector            LISTA_COMANDOS;
+
+start with PROGRAMA;
+
+PROGRAMA ::= COMANDO:cmd1 LISTA_COMANDOS:lista1
+            {:  
+                Vector<Command> arrayCommand = new Vector();
+                arrayCommand.addElement ( cmd1 );
+                if ( lista1 != null) {
+                    Enumeration<Command> e = lista1.elements();
+                    while ( e.hasMoreElements() )
+                        arrayCommand.addElement(e.nextElement());
+                }
+                RESULT = new Program ( arrayCommand );
+            :}
+            ;
+
+COMANDO ::= COMANDO_ATRIBUI:atribuicao
+            {: RESULT = atribuicao; :}
+            | 
+            COMANDO_LE:le
+            {: RESULT = le; :}
+            |
+            COMANDO_INCREMENTA:incrementa
+            {: RESULT = incrementa; :}
+            |
+            COMANDO_DECREMENTA:decrementa
+            {: RESULT = decrementa; :}
+            |
+            COMANDO_IMPRIME:imprime
+            {: RESULT = imprime; :}
+            |
+            COMANDO_SE:se
+            {: RESULT = se; :}
+            |
+            COMANDO_ENQUANTO:enquanto
+            {: RESULT = enquanto; :}
+            |
+            COMANDO_COMPOSTO:composto
+            {: RESULT = composto; :}
+            ;
+
+COMANDO_ATRIBUI ::= LETRA:nome ATRIBUICAO VALOR:valor
+            {:
+                Variable variavel = new Variable( nome );
+                RESULT = new AssignCommand( variavel, valor );
+            :}
+            ;
+
+COMANDO_LE ::= LER LETRA:nome
+            {:
+                RESULT = new ReadCommand( nome );
+            :}
+            ;
+
+COMANDO_INCREMENTA ::= INCREMENTAR LETRA:nome
+            {:
+                RESULT = new IncCommand( nome );
+            :}
+            ;
+
+COMANDO_DECREMENTA ::= DECREMENTAR LETRA:nome
+            {:
+                RESULT = new DecCommand( nome );
+            :}
+            ;
+           
+COMANDO_IMPRIME ::= IMPRIMIR VALOR:nome
+            {:
+                RESULT = new PrintCommand( nome );
+            :}
+            ;
+
+COMANDO_SE ::= SE VALOR:nome COMANDO:cmd1
+            {:
+                RESULT = new IfCommand( nome, cmd1 );
+            :}
+            ;
+
+COMANDO_ENQUANTO ::= ENQUANTO VALOR:nome COMANDO:cmd1
+            {:
+                RESULT = new WhileCommand( nome, cmd1 );
+            :}
+            ;
+
+COMANDO_COMPOSTO ::= ABRECOLCHETE COMANDO:cmd1 LISTA_COMANDOS:lista1 FECHACOLCHETE
+            {:
+                Vector<Command> arrayCommand = new Vector();
+                arrayCommand.addElement ( cmd1 );
+                if ( lista1 != null) {
+                    Enumeration<Command> e = lista1.elements();
+                    while ( e.hasMoreElements() )
+                        arrayCommand.addElement(e.nextElement());
+                }
+                RESULT = new CompositeCommand ( arrayCommand );
+            :}
+            ;
+
+VALOR ::= LETRA:nome
+          {:
+             RESULT = new Variable( nome );
+          :}
+          |
+          NUMERO:numero
+          {:
+             RESULT = new Numb( numero );
+          :}
+          ;
+
+LISTA_COMANDOS ::= COMANDO:cmd1 LISTA_COMANDOS:lista1
+            {:
+                Vector<Command> arrayCommand = new Vector();
+                arrayCommand.addElement ( cmd1 );
+                if ( lista1 != null) {
+                    Enumeration<Command> e = lista1.elements();
+                    while ( e.hasMoreElements() )
+                        arrayCommand.addElement(e.nextElement());
+                }
+                RESULT = arrayCommand;
+            :}
+            |
+            {: RESULT = null; :}
+            ;
