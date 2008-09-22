@@ -1,0 +1,38 @@
+Uma solucao de [] para [videocassete, videogame, theArtOfProgramming, ouro] com esforco 36, valor 8537 e peso 15:
+ busca o item com a maior relacao valor por peso entre [teclado,ouro,theArtOfProgramming,autorama,dicionario,guitarra,telefone,videocassete,videogame,televisor,microondas,computador,ventilador]
+ avalia ouro
+ insere ouro
+ busca o item com a maior relacao valor por peso entre [teclado,theArtOfProgramming,autorama,dicionario,guitarra,telefone,videocassete,videogame,televisor,microondas,computador,ventilador]
+ avalia theArtOfProgramming
+ insere theArtOfProgramming
+ busca o item com a maior relacao valor por peso entre [teclado,autorama,dicionario,guitarra,telefone,videocassete,videogame,televisor,microondas,computador,ventilador]
+ avalia videogame
+ insere videogame
+ busca o item com a maior relacao valor por peso entre [teclado,autorama,dicionario,guitarra,telefone,videocassete,televisor,microondas,computador,ventilador]
+ avalia teclado
+ busca item de menor valor entre os itens do saco!
+ busca o item com a maior relacao valor por peso entre [autorama,dicionario,guitarra,telefone,videocassete,televisor,microondas,computador,ventilador]
+ avalia computador
+ busca item de menor valor entre os itens do saco!
+ busca o item com a maior relacao valor por peso entre [autorama,dicionario,guitarra,telefone,videocassete,televisor,microondas,ventilador]
+ avalia autorama
+ busca item de menor valor entre os itens do saco!
+ busca o item com a maior relacao valor por peso entre [dicionario,guitarra,telefone,videocassete,televisor,microondas,ventilador]
+ avalia guitarra
+ busca item de menor valor entre os itens do saco!
+ busca o item com a maior relacao valor por peso entre [dicionario,telefone,videocassete,televisor,microondas,ventilador]
+ avalia televisor
+ busca item de menor valor entre os itens do saco!
+ busca o item com a maior relacao valor por peso entre [dicionario,telefone,videocassete,microondas,ventilador]
+ avalia telefone
+ insere telefone
+ busca o item com a maior relacao valor por peso entre [dicionario,videocassete,microondas,ventilador]
+ avalia dicionario
+ busca item de menor valor entre os itens do saco!
+ busca o item com a maior relacao valor por peso entre [videocassete,microondas,ventilador]
+ avalia videocassete
+ busca item de menor valor entre os itens do saco!
+ remove telefone
+ insere videocassete
+ saco atingiu o limite de peso!
+

@@ -1,0 +1,90 @@
+1)
+	1.1) Sim, pois todos os fatos de que h depende são verdadeiros.
+		a.
+		b.
+		c.
+		g :- f.
+		d :- a, b.
+		e :- a, c.
+		f :- b, d.
+		hh :- a, e. % h é uma palavra reservada.
+
+		?- hh.
+		Yes.
+
+	1.2) Sim, pois o resultado de h independe de b.
+		a.
+		b :- not(true).
+		c.
+		g :- f.
+		d :- a, b.
+		e :- a, c.
+		f :- b, d.
+		hh :- a, e. % h é uma palavra reservada.
+
+		?- hh.
+		Yes.
+
+	1.3) O caminho mais curto é X unificando com a, b ou c.
+
+		               X
+		               
+       a       b      c      d      e      f      g      h
+                            / \    / \    / \     |    /   \
+                            a b    a c    b d     f    a   e
+                                           / \   / \      / \
+                                           a b   b d      a c
+                                                  / \
+                                                  a b
+
+                                          
+6.2) 
+
+7,10 e 11)
+    7) Se fizermos estrutura que armazena os nós expandidos como uma lista ordenada (de acordo com os "pesos" de cada nó), para percorrer primeiro os caminhos mais prováveis de levarem a uma solução.
+
+    10) Colocando primeiro os nós AND, quando o prolog acha um false o resultado já vira false e não é necessário percorrer os nós OR, diminuindo o caminho percorrido na prova.
+
+    11) Busca informada usa heurísticas, que são regras para escolha de estados que mais provavelmente levarão a uma solução aceitável para o problema. Para a busca cega, todas as regras têm igual importância.
+        As heurísticas não são infalíveis, mas são preferíveis porque podem evitar a proliferação de estados, que pode ser computacionalmente proibitiva.
+
+15) Considerando o grafo dado como o espaço de solução completo:
+    Caso 1:
+        Depth First LR: A, 2 iterações
+        Depth First RL: B, 6 iterações
+        Breadth Fisrt LR: A, 2 iteraçoes 
+        Breadth Fisrt RL: A, 2 iteração
+
+    Caso 2:
+        Depth First LR: B, 6 iterações
+        Depth First RL: A, 3 iterações
+        Breadth Fisrt LR: A, 2 iterações 
+        Breadth Fisrt RL: A, 2 iterações
+
+  
+EXTRAS! (pois são fáceis)
+4)
+	pessoa(joao).
+	gosta(joao, Comida) :- comida(Comida).
+	comida(maca).
+	comida(galinha).
+	come(Pessoa, Comida) :- pessoa(Pessoa), comida(Comida).
+
+	4.1) ?- gosta(joao, X).
+	     X = maca ;
+         X = galinha
+
+    4.2) gosta(joao, X) -> comida(X) -> comida(maca) -> gosta(joao, maca)
+         X = maca;
+         comida(X) -> comida(galinha) -> gosta(joao, galinha)
+         X = galinha;
+         Yes.
+    
+                                 Base de conhecimento
+                                 
+      pessoa    gosta(joao, Comida)   comida         come(Pessoa, Comida)
+         |             |              /    \             /            \
+       joao       comida(Comida)    maca  galinha   pessoa(Pessoa)  comida(Comida)
+        
+
+ 

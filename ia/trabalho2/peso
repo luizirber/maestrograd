@@ -1,0 +1,34 @@
+Uma solucao de [] para [videocassete, computador, ouro] com esforco 33, valor 7800 e peso 15:
+ busca o item com o maior valor entre [teclado,ouro,theArtOfProgramming,autorama,dicionario,guitarra,telefone,videocassete,videogame,televisor,microondas,computador,ventilador]
+ avalia ouro
+ insere ouro
+ busca o item com o maior valor entre [teclado,theArtOfProgramming,autorama,dicionario,guitarra,telefone,videocassete,videogame,televisor,microondas,computador,ventilador]
+ avalia teclado
+ busca item de menor valor entre os itens do saco!
+ busca o item com o maior valor entre [theArtOfProgramming,autorama,dicionario,guitarra,telefone,videocassete,videogame,televisor,microondas,computador,ventilador]
+ avalia computador
+ insere computador
+ busca o item com o maior valor entre [theArtOfProgramming,autorama,dicionario,guitarra,telefone,videocassete,videogame,televisor,microondas,ventilador]
+ avalia theArtOfProgramming
+ busca item de menor valor entre os itens do saco!
+ busca o item com o maior valor entre [autorama,dicionario,guitarra,telefone,videocassete,videogame,televisor,microondas,ventilador]
+ avalia videogame
+ busca item de menor valor entre os itens do saco!
+ busca o item com o maior valor entre [autorama,dicionario,guitarra,telefone,videocassete,televisor,microondas,ventilador]
+ avalia autorama
+ busca item de menor valor entre os itens do saco!
+ busca o item com o maior valor entre [dicionario,guitarra,telefone,videocassete,televisor,microondas,ventilador]
+ avalia guitarra
+ busca item de menor valor entre os itens do saco!
+ busca o item com o maior valor entre [dicionario,telefone,videocassete,televisor,microondas,ventilador]
+ avalia televisor
+ busca item de menor valor entre os itens do saco!
+ busca o item com o maior valor entre [dicionario,telefone,videocassete,microondas,ventilador]
+ avalia dicionario
+ busca item de menor valor entre os itens do saco!
+ busca o item com o maior valor entre [telefone,videocassete,microondas,ventilador]
+ avalia microondas
+ busca o item com o maior valor entre [telefone,videocassete,ventilador]
+ avalia videocassete
+ insere videocassete
+ saco atingiu o limite de peso!
